@@ -1,0 +1,18 @@
+---
+services:
+  wrt-sdk-build:
+    build:
+      context: .
+    container_name: wrt-sdk-build
+    volumes:
+      - ./out:/out
+      - ./files:/files
+    command: >
+      bash -c '
+        set +e
+        export MAKEFLAGS="-j`nproc` V=s"
+        cp -v /files/ramips-mt7621-defconfig-no-llvm.config /build/openwrt/.config
+        time make defconfig download clean world
+        cp bin/targets/*/*/openwrt-sdk-*.tar.* /out
+        echo "[INFO] DONE"
+      '
