@@ -3,6 +3,8 @@ services:
   wrt-sdk-build:
     build:
       context: .
+      args:
+        WRT_VER: "24.10.0"
     container_name: wrt-sdk-build
     volumes:
       - ./out:/out
