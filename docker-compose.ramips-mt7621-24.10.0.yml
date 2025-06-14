@@ -14,7 +14,8 @@ services:
         set +e
         export MAKEFLAGS="-j`nproc` V=s"
         cp -v /files/ramips-mt7621-defconfig-no-llvm.config /build/openwrt/.config
-        time make defconfig download clean world
+        make clean defconfig download world
+        time make
         cp bin/targets/*/*/openwrt-sdk-*.tar.* /out
         echo "[INFO] DONE"
       '
